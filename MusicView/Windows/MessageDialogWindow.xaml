@@ -1,0 +1,28 @@
+﻿<Window x:Class="MusicView.Windows.MessageDialogWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:MusicView.Windows"
+        mc:Ignorable="d"
+        MinHeight="200" MinWidth="350" 
+        Height="200" Width="300" 
+        SizeToContent="WidthAndHeight"
+        AllowsTransparency="True" ResizeMode="NoResize"
+        Style="{StaticResource VS2012WindowStyle}">
+  <Grid Background="{StaticResource TitleBarBackgroundBrush}">
+    <TextBlock x:Name="messageTextBlock" HorizontalAlignment="Stretch" Margin="50,35,50,0"
+               TextWrapping="Wrap" VerticalAlignment="Top"
+               Foreground="{StaticResource BorderBrushInactive}"/>
+    <Button x:Name="firstBtn" Content="OK" HorizontalAlignment="Right" Margin="0,0,10,10" 
+            VerticalAlignment="Bottom" Width="75"
+            Style="{StaticResource ButtonDarkStyle}"/>
+    <Button x:Name="secondBtn" HorizontalAlignment="Right" Margin="0,0,90,10"
+            VerticalAlignment="Bottom" Width="75" Visibility="Collapsed"
+            Style="{StaticResource ButtonDarkStyle}"/>
+    <Button x:Name="thirdBtn" HorizontalAlignment="Right" Margin="0,0,170,10"
+            VerticalAlignment="Bottom" Width="75" Visibility="Collapsed"
+            Style="{StaticResource ButtonDarkStyle}"/>
+
+  </Grid>
+</Window>
