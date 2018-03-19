@@ -21,47 +21,75 @@ namespace MusicView
     public partial class MainWindow : Window
     {
         internal static MainWindow mainWindow;
+
+        // NAudio
         private WaveOut waveOutDevice;
         private AudioFileReader audioFileReader;
+
         internal static SoundUControl SelectedSoundUC;
+        // Thread for viewer position
         private Thread threadSliderPosition;
+        TimeSpan time, currTime;
+
+        // Chevrons for button
         private Geometry PauseChevron, PlayChevron;
-        internal delegate void Method();
+
+        // Path to directories
         private string firstFolderPath = "", secondFolderPath = "";
         private List<FolderUControl> firstFolderList, secondFolderList;
         private SolidColorBrush DiffBrush;
+        
+        // Buttons for toolbar
         private ThumbnailToolBarButton ttbbPrevious, ttbbPlayPause, ttbbNext;
 
 
         public string CurrentSound
         {
-            get { return audioFileReader?.FileName; }
+            get => audioFileReader?.FileName;
         }
 
+        /// <summary>
+        /// Start new sound.
+        /// </summary>
         private void StartNewSound()
         {
             waveOutDevice = new WaveOut();
             waveOutDevice.PlaybackStopped += WaveOutDevice_PlaybackStopped;
+
             audioFileReader = new AudioFileReader(SelectedSoundUC.Tag.ToString());
+
             waveOutDevice.Init(audioFileReader);
 
             PositionSlider.IsEnabled = true;
             PositionSlider.Maximum = audioFileReader.TotalTime.TotalSeconds;
+
             SoundNameTextBlock.Text = SelectedSoundUC.SoundName.Text.Remove(SelectedSoundUC.SoundName.Text.Length - 4);
             EndPositionTextBlock.Text = audioFileReader.TotalTime.Minutes + ":" + audioFileReader.TotalTime.Seconds;
+
             waveOutDevice.Play();
 
             if (threadSliderPosition.ThreadState == (ThreadState.Background | ThreadState.Unstarted))
                 threadSliderPosition.Start();
-            else threadSliderPosition.Resume();
+            else
+                threadSliderPosition.Resume();
         }
 
+        /// <summary>
+        /// Stop sound event.
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void WaveOutDevice_PlaybackStopped(object sender, StoppedEventArgs e){
             threadSliderPosition.Suspend();
+
             RoutedEventArgs ev = null;
+
             Button_Click_3(sender, ev);
         }
 
+        /// <summary>
+        /// Dispore player.
+        /// </summary>
         private void ClearPleyer()
         {
             if (waveOutDevice != null)
@@ -81,7 +109,13 @@ namespace MusicView
         }
 
         #region Загрузка песен
-
+        /// <summary>
+        /// Create and render new folder control.
+        /// </summary>
+        /// <param name="folder">Folder name</param>
+        /// <param name="listBox">List box in which it will be rendered.</param>
+        /// <param name="folderList">List of directories.</param>
+        /// <returns></returns>
         private async Task AddFolder(string folder, ListBox listBox, List<FolderUControl> folderList)
         {
             string[] files = Directory.GetFiles(folder);
@@ -105,14 +139,22 @@ namespace MusicView
                 foreach (string folderPath in folders)
                     await AddFolder(folderPath, listBox, folderList);
 
-            if (folders.Length <= 0 && files.Length <= 0) MessageDialogWindow.Show("Directory is empty!", "Error");
+            if (folders.Length <= 0 && files.Length <= 0) MessageDialogWindow.Show(this, "Directory is empty!", "Error");
         }
-       
+        /// <summary>
+        /// Create and render new sound control.
+        /// </summary>
+        /// <param name="folder">Folder name.</param>
+        /// <param name="files">Array of file names.</param>
+        /// <param name="listBox">List box in whick it will be rendered.</param>
+        /// <param name="folderList">List of directories.</param>
+        /// <returns></returns>
         private async Task AddFiles(string folder, string[] files, ListBox listBox, List<FolderUControl> folderList)
         {
             FolderUControl folderUControl = new FolderUControl{
                 Text = folder
             };
+
             listBox.Items.Add(folderUControl);
             folderList.Add(folderUControl);
 
@@ -121,6 +163,7 @@ namespace MusicView
             await Task.Run(() =>
             {
                 filesName = new string[files.Length];
+
                 for (int i = 0; i < filesName.Length; i++)
                     filesName[i] = files[i].Remove(0, folder.Length + 1);
             });
@@ -130,12 +173,15 @@ namespace MusicView
                 if (files[i].EndsWith(".mp3"))
                 {
                     SoundUControl soundUControl = new SoundUControl();
+
                     soundUControl.SoundName.Text = filesName[i];
                     soundUControl.Tag = files[i];
                     soundUControl.index = i;
                     soundUControl.Visibility = Visibility.Collapsed;
                     soundUControl.ownFolder = folderUControl;
+
                     listBox.Items.Add(soundUControl);
+
                     folderUControl.listSound.Add(soundUControl);
                 }
 
@@ -147,11 +193,15 @@ namespace MusicView
         public MainWindow()
         {
             InitializeComponent();
+
             waveOutDevice = new WaveOut();
             mainWindow = this;
+
             PlayChevron = Geometry.Parse("M1,2 L9,8 L1,14 Z");
             PauseChevron = Geometry.Parse("M1,0.5 L1,15.5 M6,0.5 L6,15.5");
+
             DiffBrush = new SolidColorBrush(Color.FromRgb(62, 62, 66));
+
             firstFolderList = new List<FolderUControl>();
             secondFolderList = new List<FolderUControl>();
         }
@@ -160,8 +210,10 @@ namespace MusicView
         {
             ttbbPrevious = new ThumbnailToolBarButton(System.Drawing.Icon.FromHandle(Properties.Resources.PreviousIcon.GetHicon()), "Previous");
             ttbbPrevious.Click += new EventHandler<ThumbnailButtonClickedEventArgs> (Button_Click_4);
+
             ttbbPlayPause = new ThumbnailToolBarButton(System.Drawing.Icon.FromHandle(Properties.Resources.PlayIcon.GetHicon()), "Play");
             ttbbPlayPause.Click += new EventHandler<ThumbnailButtonClickedEventArgs>(Button_Click_2);
+
             ttbbNext = new ThumbnailToolBarButton(System.Drawing.Icon.FromHandle(Properties.Resources.NextIcon.GetHicon()), "Next");
             ttbbNext.Click += new EventHandler<ThumbnailButtonClickedEventArgs>(Button_Click_3);
 
@@ -184,6 +236,9 @@ namespace MusicView
             { IsBackground = true };
         }
 
+        /// <summary>
+        /// Suspend position thread 
+        /// </summary>
         internal void SuspendPositionThread()
         {
             if (threadSliderPosition.ThreadState != (ThreadState.Background | ThreadState.Unstarted))
@@ -191,15 +246,21 @@ namespace MusicView
                     threadSliderPosition.Suspend();
         }
 
+        /// <summary>
+        /// Deleting sound.
+        /// </summary>
         internal async void DeleteSound()
         {
             bool eq = CurrentSound == SelectedSoundUC.Tag.ToString();
             string name = SelectedSoundUC.Tag.ToString();
+
             await Task.Run(() =>
             {
                 if (eq)
                 {
                     SuspendPositionThread();
+
+                    // Wait from suspended
                     while (!(threadSliderPosition.ThreadState != (ThreadState.Background | ThreadState.Suspended) ||
                         threadSliderPosition.ThreadState != (ThreadState.Background | ThreadState.Unstarted))) { }
 
@@ -225,6 +286,9 @@ namespace MusicView
             });
         }
 
+        /// <summary>
+        /// Play or stop sound
+        /// </summary>
         internal void PlayClick() => Button_Click_2(new object(), new RoutedEventArgs());
 
         // Open First Folder
@@ -250,6 +314,7 @@ namespace MusicView
                 await AddFolder(folderBrowserDialog.SelectedPath, listBoxSF, secondFolderList);
             }
         }
+
         //Play/Pause
         private void Button_Click_2(object sender, EventArgs e)
         {
@@ -292,15 +357,13 @@ namespace MusicView
                 StartNewSound();
             } catch(Exception ex)
             {
-                MessageDialogWindow.Show(ex.Message, "Error", MessageBoxButton.OK);
+                MessageDialogWindow.Show(this, ex.Message, "Error", MessageBoxButton.OK);
             }
         }
         
         private void Window_Closing(object sender, System.ComponentModel.CancelEventArgs e) => ClearPleyer();
 
         private void PositionSlider_PreviewMouseLeftButtonDown(object sender, MouseButtonEventArgs e) => SuspendPositionThread();
-
-        TimeSpan time, currTime;
 
         private void PositionSlider_ValueChanged(object sender, RoutedPropertyChangedEventArgs<double> e)
         {
@@ -330,8 +393,7 @@ namespace MusicView
                 string[] folders1 = Directory.GetDirectories(firstFolderPath);
                 string[] folders2 = Directory.GetDirectories(secondFolderPath);
 
-                List<string> folderIntersection = new List<string>();
-                folderIntersection.Add("");
+                List<string> folderIntersection = new List<string>{ "" };
 
                 await Task.Run(() =>
                 {
@@ -434,6 +496,7 @@ namespace MusicView
             if (secondFolderPath != "")
                 await AddFolder(secondFolderPath, listBoxSF, secondFolderList);
         }
+
         //<<
         private void Button_Click_4(object sender, EventArgs e)
         {
@@ -446,6 +509,7 @@ namespace MusicView
                 Button_Click_2(sender, e);
             }
         }
+
         //>>
         private void Button_Click_3(object sender, EventArgs e)
         {
@@ -461,7 +525,7 @@ namespace MusicView
         private void MenuItem_Click(object sender, RoutedEventArgs e)
         {
             if (SelectedSoundUC == null) return;
-            if (MessageDialogWindow.Show("Delete " + SelectedSoundUC.Tag.ToString(), "Delete sound", MessageBoxButton.YesNoCancel) == MessageBoxResult.Yes)
+            if (MessageDialogWindow.Show(this, "Delete " + SelectedSoundUC.Tag.ToString(), "Delete sound", MessageBoxButton.YesNoCancel) == MessageBoxResult.Yes)
                 DeleteSound();
         }
     }

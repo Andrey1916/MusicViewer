@@ -15,7 +15,7 @@ using System.Windows.Shapes;
 namespace MusicView.Windows
 {
     /// <summary>
-    /// Логика взаимодействия для MessageDialogWindow.xaml
+    /// Dialog window for display message.
     /// </summary>
     public partial class MessageDialogWindow : Window
     {
@@ -54,12 +54,14 @@ namespace MusicView.Windows
                 case MessageBoxButton.OK:
                     firstBtn.Click += OkBtn_Click;
                     break;
+
                 case MessageBoxButton.OKCancel:
                     firstBtn.Content = "Cancel";
                     secondBtn.Content = "OK";
                     firstBtn.Click += CancelBtn_Click;
                     secondBtn.Click += OkBtn_Click;
                     break;
+
                 case MessageBoxButton.YesNo:
                     firstBtn.Content = "No";
                     secondBtn.Content = "Yes";
@@ -67,6 +69,7 @@ namespace MusicView.Windows
                     firstBtn.Click += NoBtn_Click;
                     secondBtn.Click += YesBtn_Click;
                     break;
+
                 case MessageBoxButton.YesNoCancel:
                     firstBtn.Content = "Cancel";
                     secondBtn.Content = "No";
@@ -77,56 +80,95 @@ namespace MusicView.Windows
                     secondBtn.Visibility = Visibility.Visible;
                     thirdBtn.Visibility = Visibility.Visible;
                     break;
-                default: break;
             }
         }
 
-        public static MessageBoxResult Show(string Message)
+        /// <summary>
+        /// Show message in to the dialog window.
+        /// </summary>
+        /// <param name="owner">Owner window.</param>
+        /// <param name="Message">Message.</param>
+        /// <returns>MessageBoxResult</returns>
+        public static MessageBoxResult Show(Window owner, string Message)
         {
             MessageDialogWindow dialogWindow = new MessageDialogWindow(Message);
-            //dialogWindow.Owner = 
-            dialogWindow.WindowStartupLocation = WindowStartupLocation.CenterScreen;
+            dialogWindow.Owner = owner;
+            dialogWindow.WindowStartupLocation = WindowStartupLocation.CenterOwner;
+
             System.Media.SystemSounds.Exclamation.Play();
+
             dialogWindow.ShowDialog();
             return dialogWindow.DialogResult;
         }
 
-        public static MessageBoxResult Show(string Message, string caption)
+        /// <summary>
+        /// Show message in to the dialog window.
+        /// </summary>
+        /// <param name="owner">Owner window.</param>
+        /// <param name="Message">Message.</param>
+        /// <param name="caption">Title of dialog window.</param>
+        /// <returns>MessageBoxResult</returns>
+        public static MessageBoxResult Show(Window owner, string Message, string caption)
         {
             MessageDialogWindow dialogWindow = new MessageDialogWindow(Message, caption);
-            dialogWindow.WindowStartupLocation = WindowStartupLocation.CenterScreen;
+            dialogWindow.Owner = owner;
+            dialogWindow.WindowStartupLocation = WindowStartupLocation.CenterOwner;
+
             System.Media.SystemSounds.Exclamation.Play();
+
             dialogWindow.ShowDialog();
             return dialogWindow.DialogResult;
         }
 
-        public static MessageBoxResult Show(string Message, string caption, MessageBoxButton messageBoxButton)
+        /// <summary>
+        /// Show message in to the dialog window.
+        /// </summary>
+        /// <param name="owner">Owner window.</param>
+        /// <param name="Message">Message.</param>
+        /// <param name="caption">Title of dialog window.</param>
+        /// <param name="messageBoxButton">Set the button which will be displayed.</param>
+        /// <returns>MessageBoxResult</returns>
+        public static MessageBoxResult Show(Window owner, string Message, string caption, MessageBoxButton messageBoxButton)
         {
             MessageDialogWindow dialogWindow = new MessageDialogWindow(Message, caption, messageBoxButton);
-            dialogWindow.WindowStartupLocation = WindowStartupLocation.CenterScreen;
+            dialogWindow.Owner = owner;
+            dialogWindow.WindowStartupLocation = WindowStartupLocation.CenterOwner;
+
             System.Media.SystemSounds.Exclamation.Play();
             dialogWindow.ShowDialog();
             return dialogWindow.DialogResult;
         }
 
+        /// <summary>
+        /// Click Ok.
+        /// </summary>
         private void OkBtn_Click(object sender, RoutedEventArgs e)
         {
             DialogResult = MessageBoxResult.OK;
             this.Close();
         }
 
+        /// <summary>
+        /// Click Yes.
+        /// </summary>
         private void YesBtn_Click(object sender, RoutedEventArgs e)
         {
             DialogResult = MessageBoxResult.Yes;
             this.Close();
         }
 
+        /// <summary>
+        /// Click No.
+        /// </summary>
         private void NoBtn_Click(object sender, RoutedEventArgs e)
         {
             DialogResult = MessageBoxResult.No;
             this.Close();
         }
 
+        /// <summary>
+        /// Click Cancel.
+        /// </summary>
         private void CancelBtn_Click(object sender, RoutedEventArgs e)
         {
             DialogResult = MessageBoxResult.Cancel;

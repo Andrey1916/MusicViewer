@@ -11,17 +11,35 @@
         AllowsTransparency="True" ResizeMode="NoResize"
         Style="{StaticResource VS2012WindowStyle}">
   <Grid Background="{StaticResource TitleBarBackgroundBrush}">
-    <TextBlock x:Name="messageTextBlock" HorizontalAlignment="Stretch" Margin="50,35,50,0"
-               TextWrapping="Wrap" VerticalAlignment="Top"
+    <TextBlock x:Name="messageTextBlock" 
+               HorizontalAlignment="Stretch" 
+               Margin="50,35,50,0"
+               TextWrapping="Wrap" 
+               VerticalAlignment="Top"
                Foreground="{StaticResource BorderBrushInactive}"/>
-    <Button x:Name="firstBtn" Content="OK" HorizontalAlignment="Right" Margin="0,0,10,10" 
-            VerticalAlignment="Bottom" Width="75"
+    
+    <Button x:Name="firstBtn" 
+            Content="OK" 
+            HorizontalAlignment="Right" 
+            Margin="0,0,10,10" 
+            VerticalAlignment="Bottom" 
+            Width="75"
             Style="{StaticResource ButtonDarkStyle}"/>
-    <Button x:Name="secondBtn" HorizontalAlignment="Right" Margin="0,0,90,10"
-            VerticalAlignment="Bottom" Width="75" Visibility="Collapsed"
+    
+    <Button x:Name="secondBtn" 
+            HorizontalAlignment="Right" 
+            Margin="0,0,90,10"
+            VerticalAlignment="Bottom" 
+            Width="75" 
+            Visibility="Collapsed"
             Style="{StaticResource ButtonDarkStyle}"/>
-    <Button x:Name="thirdBtn" HorizontalAlignment="Right" Margin="0,0,170,10"
-            VerticalAlignment="Bottom" Width="75" Visibility="Collapsed"
+    
+    <Button x:Name="thirdBtn" 
+            HorizontalAlignment="Right" 
+            Margin="0,0,170,10"
+            VerticalAlignment="Bottom" 
+            Width="75" 
+            Visibility="Collapsed"
             Style="{StaticResource ButtonDarkStyle}"/>
 
   </Grid>

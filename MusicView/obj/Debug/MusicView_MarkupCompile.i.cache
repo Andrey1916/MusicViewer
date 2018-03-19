@@ -4,16 +4,16 @@
 winexe
 C#
 .cs
-C:\Users\AAndr\Desktop\MusicView\MusicView\obj\Debug\
+D:\Files\GitHub\MusicViewer\MusicView\obj\Debug\
 MusicView
 none
 false
 DEBUG;TRACE
-C:\Users\AAndr\Desktop\MusicView\MusicView\App.xaml
+D:\Files\GitHub\MusicViewer\MusicView\App.xaml
 6-226113482
 
-13-1058942401
-22-2070400312
+13-1334732632
+22-2142391868
 Controls\FolderUControl.xaml;Controls\SoundUControl.xaml;MainWindow.xaml;Styles\DarkStyle.xaml;Styles\VS2012WindowStyle.xaml;Windows\MessageDialogWindow.xaml;
 
 True
