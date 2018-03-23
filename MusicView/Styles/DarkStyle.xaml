@@ -36,7 +36,7 @@
   <Style x:Key="MenuItemDarkStyle" TargetType="MenuItem">
     <Setter Property="BorderThickness" Value="0"></Setter>
     <Setter Property="Height" Value="25"/>
-
+    <Setter Property="FontFamily" Value="{StaticResource Ubuntu}" />
     <Setter Property="Background" Value="Transparent"/>
     <Setter Property="Foreground" Value="{StaticResource BorderBrushInactive}"/>
     <Setter Property="Template">
@@ -131,6 +131,7 @@
 
   <Style TargetType="TabItem">
     <Setter Property="Foreground" Value="{StaticResource BorderBrushInactive}"/>
+    <Setter Property="FontFamily" Value="{StaticResource Ubuntu}" />
     <Setter Property="Template">
       <Setter.Value>
         <ControlTemplate TargetType="{x:Type TabItem}">

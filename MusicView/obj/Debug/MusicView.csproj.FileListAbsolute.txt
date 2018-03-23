@@ -72,7 +72,6 @@ D:\Files\GitHub\MusicViewer\MusicView\bin\Debug\Microsoft.WindowsAPICodePack.She
 D:\Files\GitHub\MusicViewer\MusicView\bin\Debug\Microsoft.WindowsAPICodePack.ShellExtensions.dll
 D:\Files\GitHub\MusicViewer\MusicView\bin\Debug\NAudio.dll
 D:\Files\GitHub\MusicViewer\MusicView\bin\Debug\NAudio.xml
-D:\Files\GitHub\MusicViewer\MusicView\obj\Debug\MusicView.csprojResolveAssemblyReference.cache
 D:\Files\GitHub\MusicViewer\MusicView\obj\Debug\MainWindow.baml
 D:\Files\GitHub\MusicViewer\MusicView\obj\Debug\Controls\FolderUControl.g.cs
 D:\Files\GitHub\MusicViewer\MusicView\obj\Debug\Controls\SoundUControl.g.cs

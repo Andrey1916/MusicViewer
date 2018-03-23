@@ -4,17 +4,17 @@
 winexe
 C#
 .cs
-D:\Files\Projects\MusicView\MusicView\obj\Release\
+D:\Files\GitHub\MusicViewer\MusicView\obj\Release\
 MusicView
 none
 false
 TRACE
-D:\Files\Projects\MusicView\MusicView\App.xaml
+D:\Files\GitHub\MusicViewer\MusicView\App.xaml
 6-226113482
 
-13-168459886
-221764840366
+9-111870187
+22-2142391868
 Controls\FolderUControl.xaml;Controls\SoundUControl.xaml;MainWindow.xaml;Styles\DarkStyle.xaml;Styles\VS2012WindowStyle.xaml;Windows\MessageDialogWindow.xaml;
 
-True
+False
 

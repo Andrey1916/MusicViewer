@@ -47,6 +47,15 @@ namespace MusicView.Controls
                 MainWindow.mainWindow.PlayClick();
         }
 
+        internal void Click()
+        {
+            if (MainWindow.SelectedSoundUC != null)
+                MainWindow.SelectedSoundUC.ContainerButtonBorder.Background = Brushes.Transparent;
+
+            MainWindow.SelectedSoundUC = this;
+            ContainerButtonBorder.Background = Brushes.Tomato;
+        }
+
         private void ButtonContainer_ContextMenuOpening(object sender, ContextMenuEventArgs e) => Button_Click(sender, e);
         
     }

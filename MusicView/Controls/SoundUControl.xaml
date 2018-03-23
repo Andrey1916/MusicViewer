@@ -32,8 +32,14 @@
       </Style>
     </Button.Style>
 
-    <TextBlock x:Name="SoundName" VerticalAlignment="Center" HorizontalAlignment="Left"
-                TextTrimming="CharacterEllipsis" Margin="15,0,0,0" TextWrapping="NoWrap" 
-                Foreground="White"/>
+    <TextBlock x:Name="SoundName" 
+               VerticalAlignment="Center" 
+               HorizontalAlignment="Left"
+               TextTrimming="CharacterEllipsis" 
+               Margin="15,0,0,0" 
+               TextWrapping="NoWrap"
+               Foreground="White"
+               FontFamily="{StaticResource Ubuntu}"
+               />
   </Button>
 </UserControl>

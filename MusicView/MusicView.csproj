@@ -160,6 +160,9 @@
       <LastGenOutput>Settings.Designer.cs</LastGenOutput>
     </None>
   </ItemGroup>
+   <ItemGroup>
+	  <Resource Include="UbuntuRegular.ttf" />
+	</ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
   </ItemGroup>

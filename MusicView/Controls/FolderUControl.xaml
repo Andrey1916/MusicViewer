@@ -50,7 +50,10 @@
                  TextTrimming="CharacterEllipsis" 
                  Margin="10,0,0,0" 
                  TextWrapping="NoWrap" 
-                 Foreground="White" 
+                 Foreground="White"
+                 Text="Ubuntu"
+                 FontFamily="{StaticResource Ubuntu}"
+                 FontSize="12"
                  Grid.Column="1"/>
     </Grid>
 

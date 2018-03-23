@@ -8,7 +8,8 @@
         MinHeight="350" MinWidth="650"
         Loaded="Window_Loaded" WindowStyle="None"
         Style="{StaticResource VS2012WindowStyle}" Closing="Window_Closing" 
-        Icon="Icon.ico" 
+        Icon="Icon.ico"
+        KeyUp="Window_KeyUp"
         >
   <Grid Background="{DynamicResource TitleBarBackgroundBrush}">
     <Grid.ColumnDefinitions>
@@ -39,12 +40,15 @@
     <Button Content="First Folder"  HorizontalAlignment="Left" 
             Margin="10,10,0,0"      VerticalAlignment="Top" 
             Click="Button_Click"    Height="18"
-            Style="{StaticResource ButtonDarkStyle}" 
-            Width="82"/>
+            Style="{StaticResource ButtonDarkStyle}"
+            FontFamily="{StaticResource Ubuntu}"
+            />
     <Button Content="Second Folder" HorizontalAlignment="Left" 
-            Margin="97,10,0,0" VerticalAlignment="Top"
+            Margin="120,10,0,0" VerticalAlignment="Top"
             Height="18" Click="Button_Click_1"
-            Style="{StaticResource ButtonDarkStyle}" Width="100"/>
+            Style="{StaticResource ButtonDarkStyle}"
+            FontFamily="{StaticResource Ubuntu}"
+            />
 
     <GridSplitter Grid.Column="1" 
                   Margin="0,33,0,10"
@@ -86,13 +90,15 @@
       <TextBlock x:Name="EndPositionTextBlock" 
                  HorizontalAlignment="Right" 
                  MaxWidth="100"
-                 Text="0:00" 
+                 Text="0:00"
+                 FontFamily="{StaticResource Ubuntu}"
                  VerticalAlignment="Top" 
                  Foreground="{StaticResource BorderBrushInactive}"/>
       <TextBlock x:Name="CurrentPositionTextBlock" 
                  HorizontalAlignment="Left" 
                  Text="0:00" 
-                 VerticalAlignment="Top" 
+                 VerticalAlignment="Top"
+                 FontFamily="{StaticResource Ubuntu}"
                  MaxWidth="100"
                  Foreground="{StaticResource BorderBrushInactive}"/>
       <Grid HorizontalAlignment="Center" 
@@ -156,6 +162,7 @@
                  Margin="100,0,100,0"
                  TextWrapping="Wrap" 
                  VerticalAlignment="Top"
+                 FontFamily="{StaticResource Ubuntu}"
                  Foreground="{StaticResource BorderBrushInactive}" />
 
     </Grid>
@@ -165,6 +172,7 @@
             Margin="10,10,0,0" 
             VerticalAlignment="Top" 
             Width="75"
+            FontFamily="{StaticResource Ubuntu}"
             Style="{StaticResource ButtonDarkStyle}" 
             Click="Button_Click_5"/>
     <Button Content="Diff" 
@@ -172,7 +180,8 @@
             HorizontalAlignment="Left" 
             Margin="90,10,0,0" 
             VerticalAlignment="Top" 
-            Width="75" 
+            Width="75"
+            FontFamily="{StaticResource Ubuntu}"
             Style="{StaticResource ButtonDarkStyle}" 
             Click="Button_Click_6"/>
   </Grid>

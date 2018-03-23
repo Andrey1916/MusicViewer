@@ -104,7 +104,7 @@
                       </Grid.ColumnDefinitions>
                       <TextBlock x:Name="Caption" Grid.Column="1"
                         HorizontalAlignment="Left" VerticalAlignment="Center"
-                        Margin="25,0,0,0" FontFamily="Segoe UI"
+                        Margin="25,0,0,0" FontFamily="pack://application:,,,/#Ubuntu"
                         FontSize="12" Opacity="0.66"
                         Foreground="{StaticResource StatusTextColor}"
                         Text="{Binding Path=Title, Mode=OneWay, RelativeSource={RelativeSource TemplatedParent}}"
